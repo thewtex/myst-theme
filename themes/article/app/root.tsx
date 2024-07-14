@@ -3,6 +3,7 @@ import tailwind from '~/styles/app.css';
 import thebeCoreCss from 'thebe-core/dist/lib/thebe-core.css';
 import { getConfig } from '~/utils/loaders.server';
 import { type SiteLoader } from '@myst-theme/common';
+import { ITKView2dRenderer } from './itk';
 import {
   Document,
   responseNoSite,
@@ -10,6 +11,7 @@ import {
   getThemeSession,
   ContentReload,
   SkipTo,
+  renderers,
 } from '@myst-theme/site';
 import { Outlet, useLoaderData } from '@remix-run/react';
 export { AppCatchBoundary as CatchBoundary } from '@myst-theme/site';
@@ -68,6 +70,7 @@ export default function AppWithReload() {
       staticBuild={MODE === 'static'}
       baseurl={BASE_URL}
       top={0}
+      renderers={{...renderers, itkView2d: ITKView2dRenderer }}
     >
       <SkipTo targets={[{ id: 'skip-to-article', title: 'Skip to article content' }]} />
       <Outlet />
